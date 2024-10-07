@@ -9,11 +9,13 @@
     "axios": "^1.7.7",
     "bootstrap": "^5.3.3",
     "buffer": "^6.0.3",
+    "cogo-toast": "^4.2.3",
     "cors": "^2.8.5",
     "react": "^18.3.1",
     "react-bootstrap": "^2.10.4",
     "react-dom": "^18.3.1",
     "react-html-parser": "^2.0.2",
+    "react-inner-image-zoom": "^3.0.2",
     "react-router": "^6.26.1",
     "react-router-dom": "^6.26.1",
     "react-router-transition": "^2.1.0",
@@ -46,5 +48,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "case-sensitive-paths-webpack-plugin": "^2.4.0"
   }
 }

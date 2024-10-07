@@ -14,7 +14,7 @@ export class FooterDesktop extends Component {
                address:"",
                android_app_link:"",
                ios_app_link:"",
-               facbook_link:"",
+               facebook_link:"",
                twitter_link:"",
                instagram_link:"",
                copyright_text:"", 
@@ -32,7 +32,7 @@ export class FooterDesktop extends Component {
                          address:JsonData['address'],
                          android_app_link:JsonData['android_app_link'],
                          ios_app_link:JsonData['ios_app_link'],
-                         facbook_link:JsonData['facbook_link'],
+                         facebook_link:JsonData['facebook_link'],
                          twitter_link:JsonData['twitter_link'],
                          instagram_link:JsonData['instagram_link'],
                          copyright_text:JsonData['copyright_text'], 
@@ -81,7 +81,7 @@ export class FooterDesktop extends Component {
                </div>
                
                <h5 className="footer-menu-title">SOCIAL LINK</h5>
-               <a href={this.state.facbook_link} target="_blank"><i className="fab m-1 h4 fa-facebook"></i></a>
+               <a href={this.state.facebook_link} target="_blank"><i className="fab m-1 h4 fa-facebook"></i></a>
                
                <a href={this.state.instagram_link} target="_blank"><i className="fab m-1 h4 fa-instagram"></i></a>
 

@@ -4,6 +4,8 @@ import Logo from '../../assets/images/easyshop.png';
 import Bars from '../../assets/images/bars.png';
 import {Link, Navigate} from "react-router-dom";
 import MegaMenuAll from '../home/MegaMenuAll';
+import axios from 'axios';
+import AppURL from '../../api/AppURL';
  
    
  class NavMenuDesktop extends Component {
@@ -14,11 +16,26 @@ import MegaMenuAll from '../home/MegaMenuAll';
                SideNavState: "sideNavClose",
                ContentOverState: "ContentOverlayClose",
                Searchkey:"",
-               SearchRedirectStauts:false
+               SearchRedirectStauts:false,
+               cartCount:0
           }
           this.SearchOnChange = this.SearchOnChange.bind(this);
           this.SeachOnClick = this.SeachOnClick.bind(this);
           this.searchRedirect = this.searchRedirect.bind(this);
+     }
+
+     componentDidMount(){
+          let product_code = this.props.product_code;
+          axios.get(AppURL.CartCount(product_code)).then((response)=>{
+               this.setState({cartCount:response.data})
+
+          })
+     }
+
+
+
+     logout = () => {
+          localStorage.clear();
      }
 
      SearchOnChange(event){
@@ -64,6 +81,43 @@ import MegaMenuAll from '../home/MegaMenuAll';
 
 
      render() {
+          let buttons;
+          if(localStorage.getItem('token')){
+               buttons = (
+                    <div>
+ <Link to="/favourite" className="btn"><i className="fa h4 fa-heart"></i><sup><span className="badge text-white bg-danger">3</span></sup>                  
+                   </Link> 
+
+                   <Link to="/notification" className="btn"><i className="fa h4 fa-bell"></i><sup><span className="badge text-white bg-danger">5</span></sup>                  
+                   </Link>
+                   
+                   <Link to="/profile" className="h4 btn">PROFILE</Link>
+                   <Link to="/" onClick={this.logout} className="h4 btn">LOGOUT</Link>
+                   
+       <Link to="/cart" className="cart-btn"><i className="fa fa-shopping-cart"></i> {this.state.cartCount} Items </Link>
+                    </div> 
+               )
+
+          }else{
+               buttons = (
+                    <div>
+ <Link to="/favourite" className="btn"><i className="fa h4 fa-heart"></i><sup><span className="badge text-white bg-danger">3</span></sup>                  
+                   </Link> 
+
+                   <Link to="/notification" className="btn"><i className="fa h4 fa-bell"></i><sup><span className="badge text-white bg-danger">5</span></sup>                  
+                   </Link>
+                   
+                   <Link to="/login" className="h4 btn">LOGIN</Link>
+                   <Link to="/register" className="h4 btn">REGISTER</Link>
+                   
+       <Link to="/cart" className="cart-btn"><i className="fa fa-shopping-cart"></i> 0 Items </Link>
+                    </div> 
+               )
+
+          }
+
+
+
           return (
                <Fragment>
 <div className="TopSectionDown">
@@ -90,19 +144,11 @@ import MegaMenuAll from '../home/MegaMenuAll';
 
               <Col className="p-1 mt-1" lg={4} md={4} sm={12} xs={12}>
               
-              <Link to="/favourite" className="btn"><i className="fa h4 fa-heart"></i><sup><span className="badge text-white bg-danger">3</span></sup>                  
-                   </Link>
+             {buttons}
 
-                   <Link to="/notification" className="btn"><i className="fa h4 fa-bell"></i><sup><span className="badge text-white bg-danger">5</span></sup>                  
-                   </Link>
-                   
-                   <Link to="/login" className="h4 btn">LOGIN</Link>
-                   <Link to="/register" className="h4 btn">REGISTER</Link>
-                   
-       <Link to="/cart" className="cart-btn"><i className="fa fa-shopping-cart"></i> 3 Items </Link>
               </Col>
 
-         </Row>
+         </Row> 
    {this.searchRedirect()}
     </Container>
 

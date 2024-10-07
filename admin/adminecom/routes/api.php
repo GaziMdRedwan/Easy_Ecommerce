@@ -11,6 +11,10 @@ use App\Http\Controllers\Admin\ProductListController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\ProductDetailsController;
 use App\Http\Controllers\Admin\NotificationController;
+use App\Http\Controllers\Admin\ReviewController;
+use App\Http\Controllers\Admin\ProductCartController;
+use App\Http\Controllers\Admin\FavouriteController;
+
 
 
 use App\Http\Controllers\User\AuthController;
@@ -53,7 +57,7 @@ Route::get('/getvisitor',[VisitorController::class, 'GetVisitorDetails']);
 // Contact Page Route
 Route::post('/postcontact',[ContactController::class, 'PostContactDetails']);
 
-// Site Info Route
+// Site Infro Route
 Route::get('/allsiteinfo',[SiteInfoController::class, 'AllSiteinfo']);
 
 // All Category Route
@@ -77,6 +81,48 @@ Route::get('/notification',[NotificationController::class, 'NotificationHistory'
 
 // Search Route
 Route::get('/search/{key}',[ProductListController::class, 'ProductBySearch']);
+
+// Similar Product Route
+Route::get('/similar/{subcategory}',[ProductListController::class, 'SimilarProduct']);
+
+
+// Product Cart Route
+Route::post('/addtocart',[ProductCartController::class, 'addToCart']);
+
+// Cart Count Route
+Route::get('/cartcount/{email}',[ProductCartController::class, 'CartCount']);
+
+
+// Favourite Route
+Route::get('/favourite/{product_code}/{email}',[FavouriteController::class, 'AddFavourite']);
+
+Route::get('/favouritelist/{email}',[FavouriteController::class, 'FavouriteList']);
+
+Route::get('/favouriteremove/{product_code}/{email}',[FavouriteController::class, 'FavouriteRemove']);
+
+// Cart List Route 
+Route::get('/cartlist/{email}',[ProductCartController::class, 'CartList']);
+
+Route::get('/removecartlist/{id}',[ProductCartController::class, 'RemoveCartList']);
+
+Route::get('/cartitemplus/{id}/{quantity}/{price}',[ProductCartController::class, 'CartItemPlus']);
+
+Route::get('/cartitemminus/{id}/{quantity}/{price}',[ProductCartController::class, 'CartItemMinus']);
+
+
+// Cart Order Route
+Route::post('/cartorder',[ProductCartController::class, 'CartOrder']);
+
+Route::get('/orderlistbyuser/{email}',[ProductCartController::class, 'OrderListByUser']);
+
+// Post Product Review Route
+Route::post('/postreview',[ReviewController::class, 'PostReview']);
+
+// Review Product Route
+Route::get('/reviewlist/{product_code}',[ReviewController::class, 'ReviewList']);
+
+
+
 
 
 

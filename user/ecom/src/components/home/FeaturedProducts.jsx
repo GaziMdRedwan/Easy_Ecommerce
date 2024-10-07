@@ -83,7 +83,7 @@ class FeaturedProducts extends Component {
           </div>
 
 
-     <Row>
+          <Row className="justify-content-center"> {/* Center the Row */}
                {MyView}
  
     </Row>

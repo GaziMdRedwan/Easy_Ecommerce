@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import CategoryLoading from '../PlaceHolder/CategoryLoading';
 
 class Categories extends Component {
+     
      constructor(){
           super();
           this.state ={

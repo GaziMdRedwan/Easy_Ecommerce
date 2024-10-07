@@ -1,82 +1,63 @@
-import React, { useEffect, useState, Fragment } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { Component, Fragment } from 'react';
 import AppURL from '../api/AppURL';
 import FooterDesktop from '../components/common/FooterDesktop';
 import FooterMobile from '../components/common/FooterMobile';
 import NavMenuDesktop from '../components/common/NavMenuDesktop';
 import NavMenuMobile from '../components/common/NavMenuMobile';
 import ProductDetails from '../components/ProductDetails/ProductDetails';
-import SuggestedProduct from '../components/ProductDetails/SuggestedProduct';
-import axios from 'axios';
 import SliderLoading from '../components/PlaceHolder/SliderLoading';
+import axios from 'axios';
 
-const ProductDetailsPage = () => {
-  const { code } = useParams(); // Use useParams to get the route parameter
-  const [productData, setProductData] = useState([]);
-  const [isLoading, setIsLoading] = useState("");
-  const [mainDiv, setMainDiv] = useState("d-none");
+// Importing useParams for functional components
+import { useParams } from 'react-router-dom';
 
-  useEffect(() => {
-    window.scroll(0, 0);
+// Refactor to functional component
+const ProductDetailsPage = (props) => {
+    const { code } = useParams(); // Get the product code from URL params
+    const [ProductData, setProductData] = React.useState([]);
+    const [isLoading, setIsLoading] = React.useState("d-block"); // Initialize with loading state
+    const [mainDiv, setMainDiv] = React.useState("d-none");
 
-    axios
-      .get(AppURL.ProductDetails(code))
-      .then((response) => {
-        setProductData(response.data);
-        setIsLoading("d-none");
-        setMainDiv("");
-      })
-      .catch((error) => {
-        console.error('Error fetching product details:', error);
-      });
-  }, [code]);
+    React.useEffect(() => {
+        window.scroll(0, 0);
 
-  if (mainDiv === "d-none") {
+        axios.get(AppURL.ProductDetails(code)).then(response => {
+            setProductData(response.data);
+            setIsLoading("d-none");
+            setMainDiv("");
+        }).catch(error => {
+            console.error("Error fetching product details:", error);
+            // Handle error state if needed
+        });
+    }, [code]); // Run effect when code changes
+
+    const User = props.user;
+
     return (
-      <Fragment>
-        <div className="Desktop">
-          <NavMenuDesktop />
-        </div>
+        <Fragment>
+            <div className="Desktop">
+                <NavMenuDesktop />
+            </div>
 
-        <div className="Mobile">
-          <NavMenuMobile />
-        </div>
+            <div className="Mobile">
+                <NavMenuMobile />
+            </div>
 
-        <SliderLoading isLoading={isLoading} />
+            {mainDiv === "d-none" ? (
+                <SliderLoading isLoading={isLoading} />
+            ) : (
+                <ProductDetails data={ProductData} user={User} />
+            )}
 
-        <div className="Desktop">
-          <FooterDesktop />
-        </div>
+            <div className="Desktop">
+                <FooterDesktop />
+            </div>
 
-        <div className="Mobile">
-          <FooterMobile />
-        </div>
-      </Fragment>
+            <div className="Mobile">
+                <FooterMobile />
+            </div>
+        </Fragment>
     );
-  } else {
-    return (
-      <Fragment>
-        <div className="Desktop">
-          <NavMenuDesktop />
-        </div>
-
-        <div className="Mobile">
-          <NavMenuMobile />
-        </div>
-
-        <ProductDetails data={productData} />
-        <SuggestedProduct />
-
-        <div className="Desktop">
-          <FooterDesktop />
-        </div>
-
-        <div className="Mobile">
-          <FooterMobile />
-        </div>
-      </Fragment>
-    );
-  }
 };
 
 export default ProductDetailsPage;

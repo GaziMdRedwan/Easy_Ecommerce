@@ -19,13 +19,7 @@ class HomeTop extends Component {
      }
 
      componentDidMount(){
-          axios.get(AppURL.AllCategoryDetails).then(response =>{ 
-                this.setState({MenuData:response.data});
-
-          }).catch(error=>{
-
-          });
-
+          
           axios.get(AppURL.AllSlider).then(response =>{ 
                this.setState({SliderData:response.data,isLoading:"d-none",
                mainDiv:""});
@@ -44,11 +38,10 @@ class HomeTop extends Component {
                <SliderLoading isLoading={this.state.isLoading} />
 
                <div className={this.state.mainDiv}>
-        <Container className="p-0 m-0 overflow-hidden" fluid={true}>
-                         <Row>
-                              <Col lg={3} md={3} sm={12}>
-                              <MegaMenu data={this.state.MenuData} />
-                              </Col>
+        <Container className="p-0 m-0 overflow-hidden" fluid={true} >
+        <Row className="justify-content-center"> {/* Center the Row */}
+
+
 
                               <Col lg={9} md={9} sm={12}>
                               <HomeSlider data={this.state.SliderData} />
@@ -58,6 +51,7 @@ class HomeTop extends Component {
                     </div>
                </Fragment>
           )
+          
      }
 }
 

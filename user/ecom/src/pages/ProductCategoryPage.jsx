@@ -9,7 +9,7 @@ import Category from '../components/ProductDetails/Category';
 import axios from 'axios';
 
 const ProductCategoryPage = () => {
-  const { category } = useParams(); // Get the category from URL parameters
+  const { category } = useParams(); 
   const [productData, setProductData] = useState([]);
 
   useEffect(() => {

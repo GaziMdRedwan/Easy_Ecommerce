@@ -43,14 +43,14 @@ export class Contact extends Component {
                let sendBtn = document.getElementById('sendBtn');
                let contactForm = document.getElementById('contactForm');
 
-               if(message.length==0){
-                    toast.error("Please write your message");
-               }
-               else if(name.length==0){
+               if(name.length==0){
                     toast.error("Please write down our name");
                }
                else if(email.length==0){
-                    toast.error("Please write down our Email");
+                    toast.error("Please write down our email");
+               }
+               else if(message.length==0){
+                    toast.error("Please write your message");
                }
                else if(!(validation.NameRegx).test(name)){
                     toast.error("Invaid Name");
@@ -65,7 +65,7 @@ export class Contact extends Component {
 
      axios.post(AppURL.PostContact,MyFormData).then(function (response) {
                if(response.status==200 && response.data==1){
-                    toast.success("Message Send Successfully");
+                    toast.success("Thank You For Contacting With Us! Message Sent Successfully");
                     sendBtn.innerHTML="Send";
                     contactForm.reset();
                }
@@ -114,8 +114,7 @@ export class Contact extends Component {
             <Col className="p-0 Desktop m-0" md={6} lg={6} sm={6} xs={6}>
                  <br></br><br></br>
            <p className="section-title-contact">
-           1635 Franklin Street Montgomery, Near Sherwood Mall. AL 36104
-Email: Support@easylearningbd.com
+           123 Easy St, Ecommerce City, EC 12345
            </p>
 
            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d162771.1102477064!2d-74.10054944459704!3d40.70681480276415!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2sbd!4v1627241390779!5m2!1sen!2sbd" width="550" height="450" styles="border:0;" allowfullscreen="" loading="lazy"></iframe>

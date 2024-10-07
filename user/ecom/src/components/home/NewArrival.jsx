@@ -136,7 +136,7 @@ class NewArrival extends Component {
           <p>Some Of Our Exclusive Collection, You May Like</p>
           </div>
 
-               <Row>
+               <Row className="justify-content-center"> {/* Center the Row */}
 
                <Slider ref={c=>(this.slider=c)} {...settings}>
           {MyView}
